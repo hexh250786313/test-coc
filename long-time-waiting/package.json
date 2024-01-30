@@ -1,0 +1,22 @@
+{
+  "name": "comp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "NODE_ENV=development node esbuild.js",
+    "prepare": "npm run build"
+  },
+  "author": "",
+  "engines": {
+    "coc": "^0.0.82"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "coc.nvim": "^0.0.83-next.9",
+    "esbuild": "^0.20.0"
+  }
+}
