@@ -11,6 +11,7 @@ inoremap <silent><expr> <Tab>
   \ <SID>CHECK_BACKSPACE() ? "\<Tab>" :
   \ coc#refresh()
 
+" once it set to 0, it will not freeze nvim
 let g:coc_user_config = {
-    \ "less.completion.triggerPropertyValueCompletion": 1 " once it set to 0, it will not freeze nvim
+    \ "less.completion.triggerPropertyValueCompletion": 1
     \ }
