@@ -1,3 +1,4 @@
+set nocompatible
 let g:test_coc_path = '/path/to/test-coc'
 set runtimepath^=/path/to/coc.nvim
 
