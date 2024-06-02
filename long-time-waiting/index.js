@@ -23,31 +23,49 @@ __export(long_time_waiting_exports, {
 });
 module.exports = __toCommonJS(long_time_waiting_exports);
 var import_coc = require("coc.nvim");
-function waiting() {
+function waiting(str) {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([]);
-    }, 5e3);
+    setTimeout(
+      () => {
+        resolve([
+          {
+            label: str,
+            kind: "TEST",
+            detail: "",
+            documentation: {
+              kind: import_coc.MarkupKind.Markdown,
+              value: `TEST`
+            },
+            // textEdit: TextEdit.replace(Range.create(start, end), insertText),
+            preselect: true
+          }
+        ]);
+      },
+      Math.floor(Math.random() * 5050)
+    );
   });
 }
 var activate = async (context) => {
   const languageProvider = {
-    async provideCompletionItems() {
+    async provideCompletionItems(_document, _position, _token, context2) {
+      const { option } = context2;
       let completionList = null;
-      const res = await waiting();
+      const res = await waiting((option == null ? void 0 : option.input) || "jb");
       completionList = {
         items: res,
-        isIncomplete: false
+        isIncomplete: true
       };
       return completionList;
     }
   };
   context.subscriptions.push(
     import_coc.languages.registerCompletionItemProvider(
-      "test",
-      "test",
+      "TEST",
+      "TEST",
       null,
-      languageProvider
+      languageProvider,
+      [".", "/", "@", " ", "*", "<"],
+      1e3
     )
   );
 };
