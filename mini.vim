@@ -2,17 +2,38 @@ set nocompatible
 let g:test_coc_path = '/path/to/test-coc'
 set runtimepath^=/path/to/coc.nvim
 
-execute 'set runtimepath^=' . g:test_coc_path . '/long-time-waiting'
+" execute 'set runtimepath^=' . g:test_coc_path . '/long-time-waiting'
 execute 'let g:coc_config_home = "' . g:test_coc_path . '"'
 execute 'let g:coc_data_home = "' . g:test_coc_path . '/coc"'
-let g:coc_global_extensions = ["coc-css"]
+let g:coc_global_extensions = []
 
-inoremap <silent><expr> <Tab>
-  \ coc#pum#visible() ? coc#_select_confirm() :
-  \ <SID>CHECK_BACKSPACE() ? "\<Tab>" :
-  \ coc#refresh()
+nnoremap gd <cmd>call CocAction('jumpDefinition')<cr>
+nnoremap gr <cmd>call CocAction('jumpReferences')<cr>
 
-" once it set to 0, it will not freeze nvim
+" diagnostic.separateRelatedInformationAsDiagnostics makes everything of customized LS super slow and lag
 let g:coc_user_config = {
-    \ "less.completion.triggerPropertyValueCompletion": 1
+    \ "diagnostic.separateRelatedInformationAsDiagnostics": 1,
+    \ "languageserver": {
+    \   "typescript": {
+    \   "enable": 1,
+    \   "command": "typescript-language-server",
+    \   "args": ["--stdio"],
+    \   "rootPatterns": ["package.json", ".git", ".editorconfig"],
+    \   "filetypes": [
+    \     "typescript",
+    \     "typescriptreact",
+    \     "javascript",
+    \     "javascriptreact",
+    \     "typescript.tsx",
+    \     "javascript.jsx"
+    \   ],
+    \   "disabledFeatures": [],
+    \   "initializationOptions": {
+    \     "tsserver": {
+    \     }
+    \   },
+    \   "settings": {
+    \   }
+    \   }
+    \ }
     \ }
